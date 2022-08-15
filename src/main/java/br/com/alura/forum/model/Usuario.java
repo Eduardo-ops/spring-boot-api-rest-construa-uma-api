@@ -13,6 +13,8 @@ public class Usuario {
     private String nome;
     private String email;
 
+    private String senha;
+
     // FechType para carregar todos os perfis do usuário, lazy loading não faz esse serviço.
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Perfil> perfis;
@@ -72,5 +74,13 @@ public class Usuario {
 
     public void setPerfis(List<Perfil> perfis) {
         this.perfis = perfis;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

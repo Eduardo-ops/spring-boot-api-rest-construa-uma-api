@@ -16,7 +16,7 @@ public class Topico {
 
     private String titulo;
     private String mensagem;
-    private LocalDateTime dataDeCriacao = LocalDateTime.now();
+    private LocalDateTime dataCriacao = LocalDateTime.now();
     @Enumerated(EnumType.STRING)
     private StatusTopicos status = StatusTopicos.NAO_RESPONDIDO;
     @ManyToOne
@@ -86,11 +86,11 @@ public class Topico {
     }
 
     public LocalDateTime getDataDeCriacao() {
-        return dataDeCriacao;
+        return dataCriacao;
     }
 
     public void setDataDeCriacao(LocalDateTime dataDeCriacao) {
-        this.dataDeCriacao = dataDeCriacao;
+        this.dataCriacao = dataDeCriacao;
     }
 
     public StatusTopicos getStatus() {
