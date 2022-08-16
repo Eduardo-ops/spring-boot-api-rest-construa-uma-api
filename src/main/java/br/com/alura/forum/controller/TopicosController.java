@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +38,7 @@ public class TopicosController {
     }
 
     @PostMapping
-    public ResponseEntity<TopicoDto> cadastrarTopico(@RequestBody TopicoForm topicoForm, UriComponentsBuilder uriComponentBuilder) {
+    public ResponseEntity<TopicoDto> cadastrarTopico(@RequestBody @Valid TopicoForm topicoForm, UriComponentsBuilder uriComponentBuilder) {
         Topico topico = topicoForm.converterParaTopico(cursoRepository);
         topicoRepository.save(topico);
 
