@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
@@ -39,9 +40,14 @@ public class TopicosController {
     }
 
     @GetMapping("/{id}")
-    public DetalhesTopicosDto detalharPorId(@PathVariable Long id) {
-        Topico topico = topicoRepository.getReferenceById(id);
-        return new DetalhesTopicosDto(topico);
+    public ResponseEntity<DetalhesTopicosDto> detalharPorId(@PathVariable Long id) {
+        Optional<Topico> topico = topicoRepository.findById(id);
+        if (topico.isPresent()) {
+            return ResponseEntity.ok(new DetalhesTopicosDto(topico.get()));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @PostMapping
@@ -56,15 +62,26 @@ public class TopicosController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<TopicoDto> atualizarTopico(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {
-        Topico topico = form.atualizar(id, topicoRepository);
-        return ResponseEntity.ok(new TopicoDto(topico));
+        Optional<Topico> optionalTopico = topicoRepository.findById(id);
+        if (optionalTopico.isPresent()) {
+            Topico topico = form.atualizar(id, topicoRepository);
+            return ResponseEntity.ok(new TopicoDto(topico));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> removerTopico(@PathVariable Long id) {
-        topicoRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+        Optional<Topico> optionalTopico = topicoRepository.findById(id);
+        if (optionalTopico.isPresent()) {
+            topicoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
