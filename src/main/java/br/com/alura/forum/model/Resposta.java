@@ -60,4 +60,36 @@ public class Resposta {
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
+
+    public Topico getTopico() {
+        return topico;
+    }
+
+    public void setTopico(Topico topico) {
+        this.topico = topico;
+    }
+
+    public LocalDateTime getDataDeCriacao() {
+        return dataDeCriacao;
+    }
+
+    public void setDataDeCriacao(LocalDateTime dataDeCriacao) {
+        this.dataDeCriacao = dataDeCriacao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Boolean getSolucao() {
+        return solucao;
+    }
+
+    public void setSolucao(Boolean solucao) {
+        this.solucao = solucao;
+    }
 }
