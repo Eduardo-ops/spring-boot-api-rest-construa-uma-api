@@ -1,6 +1,6 @@
 package br.com.alura.forum.model;
 
-import org.hibernate.tool.schema.internal.exec.GenerationTarget;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Perfil {
+public class Perfil implements GrantedAuthority {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,5 +32,10 @@ public class Perfil {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.nome;
     }
 }
